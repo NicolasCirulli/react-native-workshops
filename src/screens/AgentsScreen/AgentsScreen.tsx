@@ -15,8 +15,8 @@ export default function AgentsScreen() {
           key={agent}
           asChild
           href={{
-            pathname: `/${agent}`,
-            params: {},
+            pathname: `agent/${agent}`,
+            params: { name: agent },
           }}
         >
           <Pressable>

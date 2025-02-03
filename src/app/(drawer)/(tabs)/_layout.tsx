@@ -22,15 +22,6 @@ export default function TabsLayout() {
           tabBarIcon: () => <Ionicons name="albums" size={24} color="black" />,
         }}
       />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          tabBarIcon: () => (
-            <Ionicons name="settings" size={24} color="black" />
-          ),
-        }}
-      />
     </Tabs>
   );
 }
