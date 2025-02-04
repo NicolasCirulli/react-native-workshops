@@ -11,15 +11,19 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          tabBarIcon: () => <Ionicons name="home" size={24} color="black" />,
+          title: "Inicio",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="agents"
+        name="(stack)"
         options={{
-          title: "Agents",
-          tabBarIcon: () => <Ionicons name="albums" size={24} color="black" />,
+          title: "Agentes",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="albums" size={size} color={color} />
+          ),
         }}
       />
     </Tabs>

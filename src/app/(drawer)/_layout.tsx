@@ -5,13 +5,30 @@ import {
   DrawerContentComponentProps,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function DrawerLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer drawerContent={CustomDrawer}>
-        <Drawer.Screen name="(tabs)" options={{ title: "Inicio" }} />
-        <Drawer.Screen name="settings" options={{ title: "Configuracion" }} />
+        <Drawer.Screen
+          name="(tabs)"
+          options={{
+            title: "Inicio",
+            drawerIcon: ({ size, color }) => (
+              <AntDesign name="home" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="settings"
+          options={{
+            title: "Configuracion",
+            drawerIcon: ({ size, color }) => (
+              <AntDesign name="setting" size={size} color={color} />
+            ),
+          }}
+        />
       </Drawer>
     </GestureHandlerRootView>
   );
@@ -19,8 +36,8 @@ export default function DrawerLayout() {
 
 const CustomDrawer = (props: DrawerContentComponentProps) => {
   return (
-    <View className="mt-40">
-      <Text className="mb-20"> Custom </Text>
+    <View className="mt-12">
+      <Text className="mb-4 text-center"> Custom </Text>
       <DrawerItemList {...props} />
     </View>
   );

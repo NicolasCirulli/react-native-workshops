@@ -1,11 +1,11 @@
 import ScreenWrapper from "@/core/components/wrappers/ScreenWrapper";
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <ScreenWrapper>
-      <Text className="text-3xl text-red-700">Home Screen</Text>
+    <ScreenWrapper mt className="justify-center items-center">
+      <Text className="text-5xl text-blue-600 font-bold">Inicio</Text>
     </ScreenWrapper>
   );
 }
