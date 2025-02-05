@@ -15,6 +15,7 @@ export default function DrawerLayout() {
           name="(tabs)"
           options={{
             title: "Inicio",
+            headerShown: false,
             drawerIcon: ({ size, color }) => (
               <AntDesign name="home" size={size} color={color} />
             ),

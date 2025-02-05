@@ -1,17 +1,32 @@
-import { Tabs } from "expo-router";
+import { Tabs, useNavigation } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { DrawerActions } from "@react-navigation/native";
 
 export default function TabsLayout() {
+  const navigation = useNavigation();
+  const handlePress = () => {
+    navigation.dispatch(DrawerActions.toggleDrawer);
+  };
+
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        headerLeft: () => (
+          <Ionicons
+            name="menu"
+            size={24}
+            color={"gray"}
+            className="ml-2"
+            onPress={handlePress}
+          />
+        ),
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Inicio",
+          title: "Valorant",
+          headerTitleAlign: "center",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
@@ -21,6 +36,8 @@ export default function TabsLayout() {
         name="(stack)"
         options={{
           title: "Agentes",
+          headerTitleAlign: "center",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="albums" size={size} color={color} />
           ),
