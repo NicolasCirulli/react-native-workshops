@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Text } from "react-native";
-import ScreenWrapper from "@/core/components/wrappers/ScreenWrapper";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { Agent } from "@/core/services/agents/types";
-import { getAgentById } from "@/core/services/agents/agents.services";
+import useAgent from "@/hooks/useAgent";
+import ScreenWrapper from "@/core/components/wrappers/ScreenWrapper";
 export default function AgentSCreen() {
-  const [agent, setAgent] = useState<Agent>({ name: "", image: "", uuid: "" });
   const params = useLocalSearchParams();
-
   const navigation = useNavigation();
+  const { queryAgentById } = useAgent(String(params.agent));
 
   useEffect(() => {
-    getAgentById(String(params.agent)).then(setAgent);
-  }, []);
+    navigation.setOptions({ title: queryAgentById.data?.name });
+  }, [queryAgentById.data]);
 
-  useEffect(() => {
-    navigation.setOptions({ title: agent?.name });
-  }, [agent]);
+  if (queryAgentById.isLoading) {
+    return <Text> Cargando....</Text>;
+  }
 
   return (
     <ScreenWrapper mt className="items-center">
-      <Text className="text-3xl">{agent?.name}</Text>
+      <Text className="text-3xl">{queryAgentById.data?.name}</Text>
     </ScreenWrapper>
   );
 }
