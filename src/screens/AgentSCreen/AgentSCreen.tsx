@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 import ScreenWrapper from "@/core/components/wrappers/ScreenWrapper";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { agents } from "@/core/services/data";
+import { Agent } from "@/core/services/agents/types";
+import { getAgentById } from "@/core/services/agents/agents.services";
 export default function AgentSCreen() {
+  const [agent, setAgent] = useState<Agent>({ name: "", image: "", uuid: "" });
   const params = useLocalSearchParams();
 
   const navigation = useNavigation();
 
-  const agent = agents.find((agent) => agent.name == params.agent);
+  useEffect(() => {
+    getAgentById(String(params.agent)).then(setAgent);
+  }, []);
 
   useEffect(() => {
     navigation.setOptions({ title: agent?.name });

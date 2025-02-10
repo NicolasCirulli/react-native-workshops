@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-navigation/drawer": "^7.1.1",
+    "axios": "^1.7.9",
     "expo": "~52.0.28",
     "expo-constants": "~17.0.5",
     "expo-linking": "~7.0.5",

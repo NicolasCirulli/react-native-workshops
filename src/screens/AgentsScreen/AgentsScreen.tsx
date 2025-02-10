@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, Pressable, Image } from "react-native";
 import ScreenWrapper from "@/core/components/wrappers/ScreenWrapper";
 import { router } from "expo-router";
 import { FlatList } from "react-native-gesture-handler";
-import { agents } from "@/core/services/data";
+import { getAgents } from "@/core/services/agents/agents.services";
+import { Agent } from "@/core/services/agents/types";
 
 export default function AgentsScreen() {
-  const handlePress = (name: string) => {
-    router.push("agent/" + name);
+  const [agents, setAgents] = useState<Agent[]>([]);
+
+  useEffect(() => {
+    getAgents().then((res) => {
+      setAgents(res);
+    });
+  }, []);
+
+  const handlePress = (id: string) => {
+    router.push("agent/" + id);
   };
+
+  if (agents.length == 0) {
+    return <Text> Cargando....</Text>;
+  }
   return (
     <ScreenWrapper className="items-center">
       <Text className="p-5 text-center font-bold text-3xl">Agentes</Text>
@@ -17,7 +30,7 @@ export default function AgentsScreen() {
         renderItem={({ item }) => (
           <Pressable
             className="bg-gray-200 rounded-lg mb-5"
-            onPress={() => handlePress(item.name)}
+            onPress={() => handlePress(item.uuid)}
           >
             <Text className="text-xl text-center"> {item.name} </Text>
             <Image
